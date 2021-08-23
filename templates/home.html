@@ -1,15 +1,23 @@
 <!-- templates/home.html -->
 {% load socialaccount %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/home.css' %}">
 
-<h1>Donkey Survey: Login/Register</h1>
+<body>
 
-{% if user.is_authenticated %}
+    <section>
+        <h1>Donkey Survey: Login/Register</h1>
 
-<p>Welcome {{ user.username }} !!!</p>
-<a href="{% url 'logout' %}">Logout</a>
+        {% if user.is_authenticated %}
 
+        <p>Welcome {{ user.username }} !!!</p>
+        <a href="{% url 'logout' %}">Logout</a>
+    </section>
 
-{% else %}
-<a href="{% provider_login_url 'github' %}">Login with Github</a>
-<a href="{% provider_login_url 'google' %}">Login with Google</a>
-{% endif %}
+    </section>
+    {% else %}
+    <a href="{% provider_login_url 'github' %}">Login with Github</a>
+    <a href="{% provider_login_url 'google' %}">Login with Google</a>
+    {% endif %}
+    </section>
+</body>

@@ -1,0 +1,6 @@
+body {
+  border-radius: 50px;
+  background: #ffffff;
+  box-shadow:  14px 14px 27px #d9d9d9,
+               -14px -14px 27px #ffffff;
+}
