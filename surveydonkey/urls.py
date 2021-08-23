@@ -19,12 +19,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.views import LogoutView
 
-from .views import Home # new
+from .views import Home
+from .views import Dashboard
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('allauth.urls')),
     path('', Home.as_view(), name='home'),
+    path('accounts/', include('allauth.urls')),
     path('logout', LogoutView.as_view(), name="logout"),
-
+    path('dashboard/', Dashboard.as_view(), name='dashboard'),
 ]

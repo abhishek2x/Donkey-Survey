@@ -1,0 +1,19 @@
+{% load socialaccount %}
+
+{% if user.is_authenticated %}
+{% else %}
+<div>
+    <div class="container p-3">
+        <h5 class="authenticate-text">Hey!, Let's Authenticate!</h5>
+        <div class="login-box">
+            <a href="{% provider_login_url 'google' %}" class="authtication">
+                <img style="width: 45px;" src="/static/images/gmail.png" alt="google login">
+            </a>
+            <a href="{% provider_login_url 'github' %}" class="authtication">
+                <img style="width: 50px;" src="/static/images/github.png" alt="github login">
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endif %}
