@@ -1,16 +1,24 @@
-{% if user.is_authenticated %}
+{% extends 'base.html' %}
+{% load socialaccount %}
+{% load static %}
 
-<p>Welcome {{ user.username }} !!!</p>
-<a href="{% url 'logout' %}">Logout</a>
 
-<div class="container">
+{% block content %}
+
+<div class="my-5">
+
     <div class="user-data">
-        Basic user's data
+        <h2>User Details</h2>
+        <div class="m-4">
+            <p class="m-0">Welcome {{ user.username }} !!!</p>
+            <p class="m-0">You are created 17 forms till date</p>
+            <button class="btn btn-sm btn-warning my-2"><a href="{% url 'logout' %}">Logout</a></button>
+        </div>
     </div>
 
-    <div class="form-creation">
-        List Existing form and create new
+
+    <div class="form-data">
+        <h2>Forms</h2>
     </div>
 </div>
-
-{% endif %}
+{% endblock content %}

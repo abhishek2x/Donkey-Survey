@@ -19,14 +19,6 @@ body {
 }
 
 
-/* Authentication - login.html */
-
-div.login-box {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-div.login-box > a {
-  margin: 3%;
+div.bg {
+  min-height: 100vh;
 }

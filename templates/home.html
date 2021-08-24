@@ -1,42 +1,24 @@
+{% extends 'base.html' %}
 {% load socialaccount %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
 
-    <!-- Bootstrap -->
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'styles/home.css' %}">
 
-
-    <!-- Cutom Style Sheet -->
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css' %}">
-    <title>Survey Donkey</title>
-</head>
-
-<body>
-    <div class="bg">
-        <div class="container">
-            <div class="front">
-                <h1 class="py-4">Survey Donkey</h1>
-            </div>
-
-            {% if user.is_authenticated %}
-            {% include 'dashbord.html' %}
-            {% else %}
-            {% include 'login.html' %}
-            {% endif %}
-
-            {% block footer %} {% endblock %}
-        </div>
+<div class="">
+    <div class="front">
+        <h1 class="py-4">Survey Donkey</h1>
     </div>
-</body>
 
-</html>
+    {% if user.is_authenticated %}
+    <button href="{% url 'dashbord' user.username %}" class="btn btn-lg">
+        Dashboard
+    </button>
+    {% else %}
+    {% include 'login.html' %}
+    {% endif %}
+</div>
+
+{% endblock content %}
