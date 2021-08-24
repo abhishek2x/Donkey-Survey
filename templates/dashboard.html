@@ -18,7 +18,28 @@
 
 
     <div class="form-data">
-        <h2>Forms</h2>
+        <div class="d-flex justify-content-between my-3">
+            <h2>Forms</h2>
+            <button class="btn btn-sm btn-warning">Create New Form</button>
+        </div>
+        <div class="form-box d-flex flex-row justify-content-start">
+
+            {% for form in formsCreated %}
+
+            <div class="card m-2" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ form.title }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{form.description}}</h6>
+                    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p> -->
+                    <a href='{% url 'formdetail' form.id %}' class="card-link">Card link</a>
+                    <br>
+                    <subtitle>{{ form.created_on }}<subtitle>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
     </div>
 </div>
 {% endblock content %}

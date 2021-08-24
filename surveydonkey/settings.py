@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
 
     # custom apps go here...
+    'forms'
 ]
 
 MIDDLEWARE = [
