@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="my-5">
+
+    <div class="jumbotron">
+        <h1 class="display-4">{{ form.title }}</h1>
+
+        <p class="lead">{{form.description|capfirst}}</p>
+        <p class="m-0">Responses: {{responseCount}}</p>
+        <p class="m-0">Form Link: <a href="{% url 'formsubmit' form.id %}">{{request.scheme}}{{request.get_host}}{% url
+                'formsubmit' form.id %}</a></p>
+        <p class="text-muted m-0">The form was created on {{form.created_on|date:"d-m-y"}}</p>
+
+        <p class="lead my-2">
+            <a class="btn btn-danger btn-md" href="{% url 'deleteform' form.id %}" role="button">Delete Form</a>
+        </p>
+        <hr class="my-4">
+    </div>
+
+    <div class="m-3">
+        <h3>Questions: </h3>
+        <ul class="list-group list-group-numbered">
+            {% for question in questions %}
+            <li>
+                <subtitle class="lead">{{ question.question }}</subtitle>
+                <ol class="list-group-item m-3">
+                    {% for response in responses %}
+                    {% if response.question_answered.id == question.id %}
+                    <li class="m-2">
+                        <i>"{{ response.response }}"</i> - answered by <b>{{response.answered_by}}</b>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ol>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+
+{% endblock content %}

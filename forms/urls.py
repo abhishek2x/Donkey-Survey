@@ -1,4 +1,3 @@
-
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
@@ -14,4 +13,5 @@ urlpatterns = [
     path('form-results/<int:pk>', views.formresults, name='formresults'),
     path('question-count/', views.formcreate1, name='formcreate1'),
     path('create-form/', views.formcreate2, name='formcreate2'),
+    path('delete-form/<int:pk>', views.deleteform, name='deleteform'),
 ]

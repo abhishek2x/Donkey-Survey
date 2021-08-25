@@ -37,7 +37,7 @@ def formdetail(request, pk):
     questions = Question.objects.filter(form=pk)
     responses = Response.objects.filter(form_answered=pk)
 
-    responseCount = responses.count()
+    responseCount = int(responses.count() / questions.count())
 
     # print(form)
     # print(questions)       
@@ -51,7 +51,7 @@ def formdetail(request, pk):
         'responseCount': responseCount
     }
     
-    return render(request, "FormPages/detail.html", context)
+    return render(request, "FormPages/form-detail.html", context)
 
 
 def formsubmit(request, pk):
@@ -156,3 +156,8 @@ def formcreate2(request):
         return redirect('dashboard')
     
     return render(request, 'FormPages/form-create2.html', context)
+
+def deleteform(request, pk):
+    instance = Form.objects.get(id=pk)
+    instance.delete()
+    return redirect('dashboard')

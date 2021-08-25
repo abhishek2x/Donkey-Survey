@@ -33,12 +33,14 @@
                     <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                         card's content.</p> -->
                     <div class="my-2 d-flex flex-wrap justify-content-between">
-                        <a class="btn btn-link btn-sm" href="{% url 'formdetail' form.id %}" role="button">Card
-                            link</a>
-                        <a class="btn btn-link btn-sm" href="{% url 'formsubmit' form.id %}"
-                            role="button">Submit</a>
+                        <a class="btn btn-link btn-sm" href="{% url 'formdetail' form.id %}" role="button">Form
+                            Details</a>
+                        <a class="btn btn-link btn-sm" href="{% url 'formsubmit' form.id %}" role="button">Submit
+                            Form</a>
                     </div>
-                    <p class="text-muted m-0">Created on: {{ form.created_on|date:"d-m-y" }}</p>
+                    <div class="my-2 d-flex flex-wrap justify-content-between">
+                        <p class="text-muted m-0">Created on: {{ form.created_on|date:"d-m-y" }}</p>
+                    </div>
                 </div>
             </div>
             {% endfor %}
@@ -46,4 +48,22 @@
         </div>
     </div>
 </div>
+
+<script>
+    function myFunction() {
+        /* Get the text field */
+        var copyText = document.getElementById("myInput");
+
+        /* Select the text field */
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+        /* Copy the text inside the text field */
+        navigator.clipboard.writeText(copyText.value);
+
+        /* Alert the copied text */
+        alert("Copied the text: " + copyText.value);
+    }
+
+</script>
 {% endblock content %}
