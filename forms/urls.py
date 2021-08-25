@@ -4,10 +4,12 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.contrib.auth.views import LogoutView
 
-from . import views
+from .views import *
 
 urlpatterns = [
-    path('dashboard/', views.dashboard, name='dashboard'),
-    path('<int:pk>/', views.formdetail, name='formdetail'),
-    path('create/', views.formcreate, name='formcreate'),
+    path('', Home.as_view(), name='home'),
+    path('dashboard/', dashboard, name='dashboard'), # dashboard + form listing
+    path('<int:pk>/', formdetail, name='formdetail'),
+    path('forms/<int:pk>', formsubmit, name='formsubmit'),
+    # path('create/', formcreate, name='formcreate'),
 ]

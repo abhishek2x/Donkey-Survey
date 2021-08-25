@@ -12,7 +12,7 @@ class Form(models.Model):
     created_by = models.ForeignKey(to=User, on_delete=CASCADE, default=1)
 
     def __str__(self):
-        return "%s" % self.title
+        return self.title + ": " + self.description
 
     class Meta:
         ordering = ['created_on']
@@ -27,7 +27,7 @@ class Question(models.Model):
     created_by = models.ForeignKey(to=User, on_delete=CASCADE)
 
     def __str__(self):
-        return "%s" % self.question
+        return  self.form.title + ": " + self.question
 
 
 class Response(models.Model):
@@ -39,4 +39,4 @@ class Response(models.Model):
     form_answered = models.ForeignKey(to=Form, on_delete=CASCADE, related_name="voted_on")
 
     def __str__(self):
-        return "%s" % self.question_answered
+        return self.form_answered.title + ": "+ self.question_answered.question
