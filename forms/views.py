@@ -1,6 +1,7 @@
-# config/views.py
-from django.db.models.query_utils import Q
+# forms/views.py
+from django.contrib.auth import decorators
 from django.http import response
+from django.template.defaultfilters import title
 from django.views.generic import TemplateView
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
@@ -74,17 +75,77 @@ def formsubmit(request, pk):
             question_answered = ques
             
             # Create a new Object for Response Model
-            Response.objects.create(
+            instance = Response.objects.create(
                 answered_by=answered_by,
                 answered_by_email_id=answered_by_email_id,
                 response=response,
                 question_answered=question_answered,
                 form_answered=form_answered
             )
+            instance.save()
             print("Response for question saved")
         return redirect('formresults', form.id)
 
 
 def formresults(request, pk):
-    context = {}
+    form = Form.objects.filter(id=pk)[0]
+    questions = Question.objects.filter(form=pk)
+    responses = Response.objects.filter(form_answered=pk)
+
+    context = {
+        'form': form,
+        'questions': questions,
+        'responses': responses,
+    }
+
     return render(request, 'FormPages/form-result.html', context)
+
+
+@login_required
+def formcreate1(request): 
+    if request.method == 'POST':
+        question_count = request.POST['question_count']
+        request.session['question_count_value'] = question_count
+        return redirect('formcreate2')
+
+    return render(request, 'FormPages/form-create1.html')
+
+
+@login_required
+def formcreate2(request):
+    question_count = int(request.session.get('question_count_value'))
+    context = {
+        'n' : range(question_count)
+        }
+    
+    if request.method == 'POST':
+        
+        # Create a new form
+        formTitle = request.POST['form-title']
+        formDescription = request.POST['form-description']
+        form_instance = Form.objects.create(
+            title=formTitle,
+            description=formDescription,
+            created_by=request.user
+        )
+
+
+        # Add Question Objects
+        for i in range(question_count):
+            ques = request.POST[str(i+1)]
+            print(ques)
+            ques_instance = Question.objects.create(
+                question=ques,
+                form=form_instance,
+                created_by=request.user
+            )
+
+        # Saving both instances
+        form_instance.save()
+        ques_instance.save()
+
+        print("Form and All question saved")
+
+        return redirect('dashboard')
+    
+    return render(request, 'FormPages/form-create2.html', context)

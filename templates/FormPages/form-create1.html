@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<style>
+    main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60vh;
+    }
+</style>
+
+<div class="m-5">
+    <div class="container">
+        <main>
+            <div class="form-box">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="col-12 text-center">
+                        <label for="question_count" class="form-label">Number of Questions you want to have?</label>
+                        <input type="number" class="form-control" name="question_count" id="count"
+                            placeholder="Your Answer" required>
+                        <div class="invalid-feedback">
+                            Invalid input
+                        </div>
+                    </div>
+                    <button class="w-100 btn btn-primary btn-sm my-2" type="submit">Submit</button>
+                </form>
+            </div>
+        </main>
+    </div>
+</div>
+
+{% endblock content %}

@@ -12,5 +12,6 @@ urlpatterns = [
     path('form-detail/<int:pk>/', formdetail, name='formdetail'),
     path('forms/<int:pk>', formsubmit, name='formsubmit'),
     path('form-results/<int:pk>', formresults, name='formresults'),
-    # path('create/', formcreate, name='formcreate'),
+    path('question-count/', formcreate1, name='formcreate1'),
+    path('create-form/', formcreate2, name='formcreate2'),
 ]
