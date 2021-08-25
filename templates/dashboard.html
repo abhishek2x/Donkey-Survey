@@ -6,39 +6,39 @@
 {% block content %}
 
 <div class="my-5">
-    
-    <div class="user-data">
-        <h2>User Details</h2>
-        <div class="m-4">
-            <p class="m-0">Welcome {{ user.username }} !!!</p>
-            <p class="m-0">You are created 17 forms till date</p>
-            <button class="btn btn-sm btn-warning my-2"><a href="{% url 'logout' %}">Logout</a></button>
-            <a href='{% url 'home' %}'>Home</a>
-        </div>
+
+    <div class="jumbotron">
+        <h1 class="display-4">{{user.username|capfirst}}'s dashboard</h1>
+        <p class="lead">Welcome to SurveyDonkey Forms. </p>
+        <p>You are created {{count}} forms till date.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-md" href="{% url 'formcreate1' %}" role="button">Create New Form</a>
+            <a class="btn btn-warning btn-md" href="{% url 'logout' %}" role="button">Logout</a>
+        </p>
+        <hr class="my-4">
     </div>
 
-
     <div class="form-data">
-        <div class="d-flex justify-content-between my-3">
-            <h2>Forms</h2>
-            <a href='{% url 'formcreate1' %}' >
-                <button class="btn btn-sm btn-warning">Create New Form</button>
-            </a>
+        <div class="d-flex my-3">
+            <h2 class="display-6">Forms</h2>
         </div>
-        <div class="form-box d-flex flex-row justify-content-start">
+        <div class="form-box d-flex flex-row justify-content-center flex-wrap">
 
             {% for form in formsCreated %}
 
             <div class="card m-2" style="width: 18rem;">
                 <div class="card-body">
-                    <h5 class="card-title">{{ form.title }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{form.description}}</h6>
+                    <h5 class="fw-normal">{{ form.title }}</h5>
+                    <p class="fw-lighter">{{form.description}}</p>
                     <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                         card's content.</p> -->
-                    <a href='{% url 'formdetail' form.id %}' class="card-link">Card link</a>
-                    <a href='{% url 'formsubmit' form.id %}' class="card-link">Submit</a>
-                    <br>
-                    <subtitle>{{ form.created_on }}<subtitle>
+                    <div class="my-2 d-flex flex-wrap justify-content-between">
+                        <a class="btn btn-link btn-sm" href="{% url 'formdetail' form.id %}" role="button">Card
+                            link</a>
+                        <a class="btn btn-link btn-sm" href="{% url 'formsubmit' form.id %}"
+                            role="button">Submit</a>
+                    </div>
+                    <p class="text-muted m-0">Created on: {{ form.created_on|date:"d-m-y" }}</p>
                 </div>
             </div>
             {% endfor %}

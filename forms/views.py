@@ -4,27 +4,34 @@ from django.http import response
 from django.template.defaultfilters import title
 from django.views.generic import TemplateView
 from django.contrib.auth import get_user_model
-from django.contrib.auth.decorators import login_required
+from allauth.account.decorators import verified_email_required
 from django.shortcuts import redirect, render
 from forms.models import *
 
 # Create your views here.
-class Home(TemplateView):
-    template_name = 'home.html'
 
-@login_required
+# class Home(TemplateView):
+#     template_name = 'home.html'
+
+def home(request):
+    return render(request, "home.html")
+
+@verified_email_required
 def dashboard(request):
     User = get_user_model()
     u = User.objects.get(username=request.user.username)
-    print("User Logged In :", u)
-
     formsCreated = Form.objects.filter(created_by=request.user)
-    print(formsCreated)
-    return render(request, "dashboard.html", {'formsCreated': formsCreated})
+
+    context = {
+        'formsCreated': formsCreated,
+        'count': formsCreated.count
+    }
+
+    return render(request, "dashboard.html", context)
 
 
 
-@login_required
+@verified_email_required
 def formdetail(request, pk):
     form = Form.objects.filter(id=pk)[0]
     questions = Question.objects.filter(form=pk)
@@ -101,7 +108,7 @@ def formresults(request, pk):
     return render(request, 'FormPages/form-result.html', context)
 
 
-@login_required
+@verified_email_required
 def formcreate1(request): 
     if request.method == 'POST':
         question_count = request.POST['question_count']
@@ -111,7 +118,7 @@ def formcreate1(request):
     return render(request, 'FormPages/form-create1.html')
 
 
-@login_required
+@verified_email_required
 def formcreate2(request):
     question_count = int(request.session.get('question_count_value'))
     context = {
