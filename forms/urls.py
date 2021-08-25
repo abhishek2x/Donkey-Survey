@@ -9,7 +9,8 @@ from .views import *
 urlpatterns = [
     path('', Home.as_view(), name='home'),
     path('dashboard/', dashboard, name='dashboard'), # dashboard + form listing
-    path('<int:pk>/', formdetail, name='formdetail'),
+    path('form-detail/<int:pk>/', formdetail, name='formdetail'),
     path('forms/<int:pk>', formsubmit, name='formsubmit'),
+    path('form-results/<int:pk>', formresults, name='formresults'),
     # path('create/', formcreate, name='formcreate'),
 ]

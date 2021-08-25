@@ -34,6 +34,7 @@
                     <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                         card's content.</p> -->
                     <a href='{% url 'formdetail' form.id %}' class="card-link">Card link</a>
+                    <a href='{% url 'formsubmit' form.id %}' class="card-link">Submit</a>
                     <br>
                     <subtitle>{{ form.created_on }}<subtitle>
                 </div>

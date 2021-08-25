@@ -1,9 +1,10 @@
 # config/views.py
+from django.db.models.query_utils import Q
 from django.http import response
 from django.views.generic import TemplateView
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from forms.models import *
 
 # Create your views here.
@@ -45,28 +46,45 @@ def formdetail(request, pk):
     return render(request, "FormPages/detail.html", context)
 
 
-# @login_required
-# def formdetail(request):
-#     if request.method == 'POST':
-#         form = CreatePollForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             send_mail(
-#                 'Your Poll is Successfully Created',
-#                 'Your Poll has been Created Successfully, You may check it by following the Link.',
-#                 'vitbook.smtp.team@gmail.com',
-#                 [request.user.email],
-#                 fail_silently=False
-#             )
-#             return redirect('poll_home')
-#     else:
-#         form = CreatePollForm()
-#     context = {
-#         'form': form
-#     }
-#     return render(request, 'social/poll_create.html', context)
-    
 def formsubmit(request, pk):
+        
+    form = Form.objects.filter(id=pk)[0]
+    questions = Question.objects.filter(form=pk)
+    for q in questions: 
+        print(q.id)
+
     if request.method == 'GET':
-        context = {}
+        context = {
+            'form': form,
+            'questions': questions
+            }
         return render(request, 'FormPages/form-submit.html', context)
+
+        # print(request.POST['answered_by_email_id'])
+
+    if request.method == 'POST':
+        print("FORM SUBMITTED")
+        
+        answered_by = request.POST['answered_by']
+        answered_by_email_id = request.POST['answered_by_email_id']
+        form_answered = form
+
+        for ques in questions:
+            response = request.POST[str(ques.id)]
+            question_answered = ques
+            
+            # Create a new Object for Response Model
+            Response.objects.create(
+                answered_by=answered_by,
+                answered_by_email_id=answered_by_email_id,
+                response=response,
+                question_answered=question_answered,
+                form_answered=form_answered
+            )
+            print("Response for question saved")
+        return redirect('formresults', form.id)
+
+
+def formresults(request, pk):
+    context = {}
+    return render(request, 'FormPages/form-result.html', context)
