@@ -1,4 +1,5 @@
 # forms/views.py
+from allauth.account.utils import send_email_confirmation
 from django.contrib.auth import decorators
 from django.http import response
 from django.template.defaultfilters import title
@@ -6,12 +7,10 @@ from django.views.generic import TemplateView
 from django.contrib.auth import get_user_model
 from allauth.account.decorators import verified_email_required
 from django.shortcuts import redirect, render
+from django.core.mail import send_mail
 from forms.models import *
 
 # Create your views here.
-
-# class Home(TemplateView):
-#     template_name = 'home.html'
 
 def home(request):
     return render(request, "home.html")
@@ -29,15 +28,15 @@ def dashboard(request):
 
     return render(request, "dashboard.html", context)
 
-
-
 @verified_email_required
 def formdetail(request, pk):
     form = Form.objects.filter(id=pk)[0]
     questions = Question.objects.filter(form=pk)
     responses = Response.objects.filter(form_answered=pk)
 
-    responseCount = int(responses.count() / questions.count())
+    responseCount=0
+    if questions.count():
+        responseCount = int(responses.count() / questions.count())
 
     # print(form)
     # print(questions)       
@@ -58,8 +57,6 @@ def formsubmit(request, pk):
         
     form = Form.objects.filter(id=pk)[0]
     questions = Question.objects.filter(form=pk)
-    for q in questions: 
-        print(q.id)
 
     if request.method == 'GET':
         context = {
@@ -91,6 +88,13 @@ def formsubmit(request, pk):
             )
             instance.save()
             print("Response for question saved")
+            # send_mail(
+            #     'You have successfully submitted the form',
+            #     'You have successfully submitted the form, Thankyou for staying with SurveyDonkey.',
+            #     'vitbook.smtp.team@gmail.com',
+            #     [answered_by_email_id],
+            #     fail_silently=True
+            # )
         return redirect('formresults', form.id)
 
 
@@ -151,6 +155,13 @@ def formcreate2(request):
         form_instance.save()
         ques_instance.save()
 
+        # send_mail(
+        #     'You have successfully created the form',
+        #     'You have successfully created the form, Thankyou for staying with SurveyDonkey.',
+        #     'vitbook.smtp.team@gmail.com',
+        #     [request.user],
+        #     fail_silently=True
+        # )
         print("Form and All question saved")
 
         return redirect('dashboard')
@@ -160,4 +171,13 @@ def formcreate2(request):
 def deleteform(request, pk):
     instance = Form.objects.get(id=pk)
     instance.delete()
+
+    # send_mail(
+    #     'You form has been deleted',
+    #     'You form has been deleted, Thankyou for staying with SurveyDonkey.',
+    #     'vitbook.smtp.team@gmail.com',
+    #     [request.user],
+    #     fail_silently=True
+    # )
+    
     return redirect('dashboard')

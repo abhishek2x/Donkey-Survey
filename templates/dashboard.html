@@ -10,7 +10,8 @@
     <div class="jumbotron">
         <h1 class="display-4">{{user.username|capfirst}}'s dashboard</h1>
         <p class="lead">Welcome to SurveyDonkey Forms. </p>
-        <p>You are created {{count}} forms till date.</p>
+        <p class="m-0">You are created <b>{{count}}</b> forms till date.</p>
+        <p class="m-0 mb-4">{{request.user.email}}.</p>
         <p class="lead">
             <a class="btn btn-primary btn-md" href="{% url 'formcreate1' %}" role="button">Create New Form</a>
             <a class="btn btn-warning btn-md" href="{% url 'logout' %}" role="button">Logout</a>
