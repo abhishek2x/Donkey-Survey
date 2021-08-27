@@ -1,25 +1,29 @@
 <div align="center">
 
-<h1>Donkey-Survey </h1>
+<h1>⚧️ Donkey-Survey ⚧️</h1>
 
 <b>Create, share, Anayse Customer's data through surveys like never before</b>
 
 </div>
 
-# Features
+# Features 📋
 
 - Refine Customer Experiences, The Better Way
 - Do more than just surveys.
 - Power-up your experience management programs.
 
-# Tech Stack
+# Tech Stack 📊
 
 * Django
 * HTML/CSS/JS
 * Heroku
 * Docker
 
-# Application Walkthrough
+# Database Diagram
+
+<img src="./diagrams/database.png">
+
+# Application Walkthrough 🚲
 
 ## Landing Screen
 
