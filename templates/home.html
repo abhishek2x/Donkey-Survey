@@ -7,18 +7,25 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css' %}">
 
-<div class="">
-    <div class="front">
-        <h1 class="py-4">Survey Donkey</h1>
+<div class="row d-flex justify-content-center align-items-center mt-5">
+    <div class="col-6">
+        <div class="front">
+            <h1 class=" display-4 ">Survey Donkey</h1>
+            <h4 class="text-muted">Do more than just surveys.</h4>
+        </div>
+        <hr>
+        {% if user.is_authenticated %}
+        <!-- <button href="{% url 'dashbord' user.username %}" class="btn btn-lg">
+            Dashboard
+        </button> -->
+        {% else %}
+        {% include 'login.html' %}
+        {% endif %}
     </div>
-
-    {% if user.is_authenticated %}
-    <button href="{% url 'dashbord' user.username %}" class="btn btn-lg">
-        Dashboard
-    </button>
-    {% else %}
-    {% include 'login.html' %}
-    {% endif %}
+    <div class="col-6">
+        <img src="{% static 'images/front.svg' %}" alt="bg" width="100%">
+    </div>
+    {% include 'footer.html' %}
 </div>
 
 {% endblock content %}

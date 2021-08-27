@@ -1,0 +1,13 @@
+# Application Setup
+
+
+* Git clone ...
+* 
+*
+* 
+* 
+*
+* 
+* 
+*
+* 

@@ -13,18 +13,18 @@
                     {% csrf_token %}
                     <div class="row g-3">
                         <div class="col-12">
-                            <label for="address" class="form-label">Form Title </label>
+                            <label for="address" class="form-label text-large">Form Title </label>
                             <input type="text" class="form-control" name="form-title" id="question"
                                 placeholder="Your Question" required>
                         </div>
                         <div class="col-12">
-                            <label for="address" class="form-label">Form Description</label>
+                            <label for="address" class="form-label text-large">Form Description</label>
                             <input type="text" class="form-control" name="form-description" id="question"
                                 placeholder="Your Question" required>
                         </div>
                         {% for _ in n %}
                         <div class="col-12">
-                            <label for="address" class="form-label">Enter {{ forloop.counter }} Question: </label>
+                            <label for="address" class="form-label text-large">Enter {{ forloop.counter }} Question: </label>
                             <input type="text" class="form-control" name={{forloop.counter}} id="question"
                                 placeholder="Your Question" required>
                         </div>
