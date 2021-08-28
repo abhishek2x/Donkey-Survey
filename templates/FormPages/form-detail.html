@@ -11,7 +11,7 @@
 
         <p class="lead">{{form.description|capfirst}}</p>
         <p class="m-0">Responses: {{responseCount}}</p>
-        <p class="m-0">Form Link: <a href="{% url 'formsubmit' form.id %}">{{request.scheme}}{{request.get_host}}{% url 'formsubmit' form.id %}</a></p>
+        <p class="m-0">Form Link: <a target="_blank" href="{% url 'formsubmit' form.id %}">{{request.scheme}}://{{request.get_host}}{% url 'formsubmit' form.id %}</a></p>
         <p class="text-muted m-0">The form was created on {{form.created_on|date:"d-m-y"}}</p>
 
         <p class="lead mt-4">
