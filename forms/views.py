@@ -18,12 +18,18 @@ import csv
 # Create your views here.
 
 def home(request):
+    """
+        Landing page of the web application
+    """
     if request.user.is_authenticated:
         return redirect('dashboard')
     return render(request, "home.html")
 
 @verified_email_required
 def dashboard(request):
+    """
+        User's Dashboard
+    """
     User = get_user_model()
     u = User.objects.get(username=request.user.username)
     formsCreated = Form.objects.filter(created_by=request.user)
@@ -37,6 +43,9 @@ def dashboard(request):
 
 @verified_email_required
 def formdetail(request, pk):
+    """
+        Detail page of form which lists all it's activities.
+    """
     form = Form.objects.filter(id=pk)[0]
     questions = Question.objects.filter(form=pk)
     responses = Response.objects.filter(form_answered=pk)
@@ -61,7 +70,10 @@ def formdetail(request, pk):
 
 
 def formsubmit(request, pk):
-        
+    """
+        Form Submission page that will be shared with target customers
+    """
+
     form = Form.objects.filter(id=pk)[0]
     questions = Question.objects.filter(form=pk)
 
@@ -106,21 +118,19 @@ def formsubmit(request, pk):
 
 
 def formresults(request, pk):
-    form = Form.objects.filter(id=pk)[0]
-    questions = Question.objects.filter(form=pk)
-    responses = Response.objects.filter(form_answered=pk)
+    """
+        Form Result page, which will be displayed after form submission
+    """
 
-    context = {
-        'form': form,
-        'questions': questions,
-        'responses': responses,
-    }
-
-    return render(request, 'FormPages/form-result.html', context)
+    return render(request, 'FormPages/form-result.html')
 
 
 @verified_email_required
 def formcreate1(request): 
+    """
+        Form Create Page: Ask for number of Questions to be included in the Form
+    """
+    
     if request.method == 'POST':
         question_count = request.POST['question_count']
         request.session['question_count_value'] = question_count
@@ -131,6 +141,10 @@ def formcreate1(request):
 
 @verified_email_required
 def formcreate2(request):
+    """
+        Form Create Page: Write down all the question to be included in Forms.
+    """
+
     question_count = int(request.session.get('question_count_value'))
     context = {
         'n' : range(question_count)
@@ -179,6 +193,10 @@ def formcreate2(request):
 
 @verified_email_required
 def deleteform(request, pk):
+    """
+        Form Delete Page
+    """
+
     instance = Form.objects.get(id=pk)
     instance.delete()
 
@@ -195,6 +213,10 @@ def deleteform(request, pk):
 
 @verified_email_required
 def export(request, pk):
+    """
+        Exporting Form data to user's local system
+    """
+
     response = HttpResponse(content_type='text/csv')
 
     writer = csv.writer(response)

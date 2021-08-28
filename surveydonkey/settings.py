@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'django.contrib.admindocs'
     'django.contrib.sites',
 
     # third-party apps
@@ -51,7 +52,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'debug_toolbar',
     'django_extensions',
-
 
     # custom apps
     'forms'
@@ -68,10 +68,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.contrib.admindocs.middleware.XViewMiddleware'
 
     # third party
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-
 
 ]
 

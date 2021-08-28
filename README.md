@@ -25,22 +25,22 @@
 
 ## User's Dashboard 
 
-<img src="./readme_images/1.png">
+<img src="./readme_images/2.png">
 
 
 ## Creating a new form
 
-<img src="./readme_images/1.png">
+<img src="./readme_images/3.png">
 
 
 ## Form Detail Page
 
-<img src="./readme_images/1.png">
+<img src="./readme_images/4.png">
 
 
 ## Form to be shared with Customers
 
-<img src="./readme_images/1.png">
+<img src="./readme_images/5.png">
 
 
 # Tech Stack 📊

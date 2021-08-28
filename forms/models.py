@@ -6,6 +6,13 @@ from django.db import models
 
 
 class Form(models.Model):
+    
+    """
+    Store Forms that will be created/submitted by the users.
+    :model:`forms.Form`.
+    """
+
+
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -21,6 +28,12 @@ class Form(models.Model):
             return self.title
 
 class Question(models.Model):
+
+    """
+    Store Questions of all the Forms.
+    :model:`forms.Question`.
+    """
+
     question = models.CharField(max_length=255)
     created_on = models.DateTimeField(auto_now_add=True)
     form = models.ForeignKey(to=Form, on_delete=CASCADE)
@@ -31,6 +44,12 @@ class Question(models.Model):
 
 
 class Response(models.Model):
+
+    """
+    Store Responses of all the Questions of all the Forms.
+    :model:`forms.Response`.
+    """
+
     answered_by = models.CharField(max_length=255)
     response = models.CharField(max_length=500)
     created_on = models.DateTimeField(auto_now_add=True)

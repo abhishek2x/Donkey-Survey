@@ -27,6 +27,7 @@ from . import settings
 
 urlpatterns = [
     path('', include('forms.urls')), 
+    # path('admin/doc/', include('django.contrib.admindocs.urls')),    
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
