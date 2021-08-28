@@ -11,12 +11,15 @@
 
         <p class="lead">{{form.description|capfirst}}</p>
         <p class="m-0">Responses: {{responseCount}}</p>
-        <p class="m-0">Form Link: <a target="_blank" href="{% url 'formsubmit' form.id %}">{{request.scheme}}://{{request.get_host}}{% url 'formsubmit' form.id %}</a></p>
+        <p class="m-0">Form Link: <a target="_blank"
+                href="{% url 'formsubmit' form.id %}">{{request.scheme}}://{{request.get_host}}{% url 'formsubmit' form.id %}</a></p>
         <p class="text-muted m-0">The form was created on {{form.created_on|date:"d-m-y"}}</p>
 
         <p class="lead mt-4">
             <a class="btn btn-warning btn-md" href="{% url 'export' form.id %}" role="button">Download Responses</a>
-            <a class="btn btn-primary btn-md" href="" role="button">Export to Sheet</a>
+            <button type="button" class="btn btn-primary btn-md" onclick="sayit()">
+                Export to Sheet
+            </button>
             <a class="btn btn-danger btn-md" href="{% url 'deleteform' form.id %}" role="button">Delete Form</a>
         </p>
         <hr class="my-4">
@@ -43,5 +46,11 @@
     </div>
 
 </div>
+
+<script>
+    function sayit() {
+        alert("The Authentication of Sheet API was happening through CLI. Wasn't able to figure a solution at that time.")
+    }
+</script>
 
 {% endblock content %}

@@ -1,7 +1,7 @@
 
-# Optimisation Techniques
+# Optimisation Techniques 🧠 
 
-## Implemented
+## Implemented ✅
 * Database Optimisation: Reducing SQL Queries (Most costly operation).
 * Static File compression using WhiteNoise.
 * Using Conditional Get Middleware or GZIP Middleware(`django.middleware.gzip.GZipMiddleware`)
@@ -13,7 +13,7 @@
 * SQL Logging
 * Debug Toolbar: To monitor activities
 
-## Further Improvements
+## Further Improvements ⏲️
 
 * Using a Caching Framework.
 * Laziness to avoid computation in the first place. 

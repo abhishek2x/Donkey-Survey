@@ -12,7 +12,6 @@ from django.shortcuts import redirect, render
 from django.core.mail import send_mail
 from oauth2client.service_account import ServiceAccountCredentials
 from forms.models import *
-import gspread
 import csv
 
 # Create your views here.
@@ -236,40 +235,3 @@ def export(request, pk):
     response['Content-Disposition'] = 'attachment; filename="responses.csv"'
 
     return response
-
-
-# def exportsheets(request, pk):
-    
-
-#     scope = ["https://spreadsheets.google.com/feeds",
-#                 "https://www.googleapis.com/auth/spreadsheets",
-#                 "https://www.googleapis.com/auth/drive.file",
-#                 "https://www.googleapis.com/auth/drive"]
-
-#     credentials = ServiceAccountCredentials.\
-#                         from_json_keyfile_name("./client_secret.json", scope)
-        
-#     gc = gspread.authorize(credentials)
-
-#     wks = gc.open('teams').sheet1
-
-#     print(wks.get_all_records())
-
-
-
-    # gc = pygsheets.authorize(client_secret='client_secret')
-
-    # # Open spreadsheet and then worksheet
-    # sh = gc.open('my new sheet')
-    # wks = sh.sheet1
-
-    # # Update a cell with value (just to let him know values is updated ;) )
-    # wks.update_value('A1', "Hey yank this numpy array")
-    # my_nparray = np.random.randint(10, size=(3, 4))
-
-    # # update the sheet with array
-    # wks.update_values('A2', my_nparray.tolist())
-
-    # # share the sheet with your friend
-    # sh.share("myFriend@gmail.com", role='writer')
-
