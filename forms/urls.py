@@ -14,4 +14,6 @@ urlpatterns = [
     path('question-count/', views.formcreate1, name='formcreate1'),
     path('create-form/', views.formcreate2, name='formcreate2'),
     path('delete-form/<int:pk>', views.deleteform, name='deleteform'),
+    path('export/<int:pk>', views.export, name='export'),
+    # path('export-sheets/<int:pk>', views.exportsheets, name='exportsheets'),
 ]

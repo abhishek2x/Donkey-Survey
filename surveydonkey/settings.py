@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
 from pathlib import Path
 import os
 
@@ -26,7 +25,7 @@ SECRET_KEY = 'django-insecure-zeb2p=xvi#hao7g_7i4&al_denlw2w2=js#c+#slh%&posj-9f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1', ".herokuapp.com"]
 
 
 # Application definition
@@ -60,6 +59,7 @@ MIDDLEWARE = [
     
     # default
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -69,6 +69,7 @@ MIDDLEWARE = [
 
     # third party
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+
 
 ]
 
@@ -156,6 +157,9 @@ STATICFILES_DIRS = [
     '/var/www/static/',
 
 ]
+
+WHITENOISE_USE_FINDERS = True
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # Default primary key field type

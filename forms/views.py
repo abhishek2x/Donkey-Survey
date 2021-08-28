@@ -1,14 +1,19 @@
+
 # forms/views.py
 from allauth.account.utils import send_email_confirmation
 from django.contrib.auth import decorators
-from django.http import response
+from django.http import request, response, HttpResponse
 from django.template.defaultfilters import title
+from django.urls.base import resolve
 from django.views.generic import TemplateView
 from django.contrib.auth import get_user_model
 from allauth.account.decorators import verified_email_required
 from django.shortcuts import redirect, render
 from django.core.mail import send_mail
+from oauth2client.service_account import ServiceAccountCredentials
 from forms.models import *
+import gspread
+import csv
 
 # Create your views here.
 
@@ -170,6 +175,9 @@ def formcreate2(request):
     
     return render(request, 'FormPages/form-create2.html', context)
 
+
+
+@verified_email_required
 def deleteform(request, pk):
     instance = Form.objects.get(id=pk)
     instance.delete()
@@ -183,3 +191,63 @@ def deleteform(request, pk):
     # )
     
     return redirect('dashboard')
+
+
+@verified_email_required
+def export(request, pk):
+    response = HttpResponse(content_type='text/csv')
+
+    writer = csv.writer(response)
+    writer.writerow(['Form ID', 'Question ID', 'Response', 'Answered By', 'Email ID'])
+
+    responses = Response.objects.filter(form_answered=pk)
+
+    # for R in responses:
+    #     R.form_title = R.form_answered.title
+    #     print(R.form_title)
+
+    # IMPROVEMENT: Instead if ID we can have title for Form and Question
+
+    for R in responses.values_list('form_answered', 'question_answered', 'response', 'answered_by', 'answered_by_email_id'):
+        writer.writerow(R)
+
+    response['Content-Disposition'] = 'attachment; filename="responses.csv"'
+
+    return response
+
+
+# def exportsheets(request, pk):
+    
+
+#     scope = ["https://spreadsheets.google.com/feeds",
+#                 "https://www.googleapis.com/auth/spreadsheets",
+#                 "https://www.googleapis.com/auth/drive.file",
+#                 "https://www.googleapis.com/auth/drive"]
+
+#     credentials = ServiceAccountCredentials.\
+#                         from_json_keyfile_name("./client_secret.json", scope)
+        
+#     gc = gspread.authorize(credentials)
+
+#     wks = gc.open('teams').sheet1
+
+#     print(wks.get_all_records())
+
+
+
+    # gc = pygsheets.authorize(client_secret='client_secret')
+
+    # # Open spreadsheet and then worksheet
+    # sh = gc.open('my new sheet')
+    # wks = sh.sheet1
+
+    # # Update a cell with value (just to let him know values is updated ;) )
+    # wks.update_value('A1', "Hey yank this numpy array")
+    # my_nparray = np.random.randint(10, size=(3, 4))
+
+    # # update the sheet with array
+    # wks.update_values('A2', my_nparray.tolist())
+
+    # # share the sheet with your friend
+    # sh.share("myFriend@gmail.com", role='writer')
+

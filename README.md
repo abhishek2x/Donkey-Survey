@@ -1,8 +1,8 @@
 <div align="center">
 
-<h1>⚧️ Donkey-Survey ⚧️</h1>
+<h1> ✨ Donkey-Survey ✨ </h1>
 
-<b>Create, share, Anayse Customer's data through surveys like never before</b>
+<b> Create, share, Analyse Customer's data through surveys like never before  </b>
 
 </div>
 

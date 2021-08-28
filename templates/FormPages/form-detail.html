@@ -15,6 +15,8 @@
         <p class="text-muted m-0">The form was created on {{form.created_on|date:"d-m-y"}}</p>
 
         <p class="lead mt-4">
+            <a class="btn btn-warning btn-md" href="{% url 'export' form.id %}" role="button">Download Responses</a>
+            <a class="btn btn-primary btn-md" href="" role="button">Export to Sheet</a>
             <a class="btn btn-danger btn-md" href="{% url 'deleteform' form.id %}" role="button">Delete Form</a>
         </p>
         <hr class="my-4">
