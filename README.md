@@ -13,33 +13,76 @@
 - Do more than just surveys.
 - Power-up your experience management programs.
 
-# Database Diagram
+# Quick Start
 
-<img src="./diagrams/database.png">
+- Fork and Clone the repo using
 
-# Optimisation Techniques 🧠 
+```
+git clone https://github.com/abhishek2x/Donkey-Survey.git
+cd Donkey-Survey/
+```
+
+- Install dependencies using
+
+```
+pip install -r requirements.txt
+```
+
+- Add you email and password in donkeysurvey/setting.py file
+
+```
+EMAIL_HOST_USER = '<your_gmail_id>'
+EMAIL_HOST_PASSWORD = '<your_password>'
+```
+
+- Make migrations
+
+```
+python manage.py makemigrations
+```
+
+- Migrate Database
+
+```
+python manage.py migrate
+```
+
+- Create a superuser
+
+```
+python manage.py createsuperuser
+```
+
+- Run server using
+
+```
+python manage.py runserver
+```
+
+# Optimisation Techniques 🧠
 
 ## Implemented ✅
-* Database Optimisation: Reducing SQL Queries (Most costly operation).
-* Static File compression using WhiteNoise.
-* Using Conditional Get Middleware or GZIP Middleware(`django.middleware.gzip.GZipMiddleware`)
-* Writing Efficient Code
-    * There are three prominent ways to lift the efficiency of the code:
-        * Upgrading/Replacing the third-party packages
-        * Simplifying the code
-        * Restructuring the code
-* SQL Logging
-* Debug Toolbar: To monitor activities
+
+- Database Optimisation: Reducing SQL Queries (Most costly operation).
+- Static File compression using WhiteNoise.
+- Using Conditional Get Middleware or GZIP Middleware(`django.middleware.gzip.GZipMiddleware`)
+- Writing Efficient Code
+  - There are three prominent ways to lift the efficiency of the code:
+    - Upgrading/Replacing the third-party packages
+    - Simplifying the code
+    - Restructuring the code
+- SQL Logging
+- Debug Toolbar: To monitor activities
 
 ## Further Improvements ⏲️
 
-* Using a Caching Framework.
-* Laziness to avoid computation in the first place. 
-* QuerySets Specific Function
-    * select_related()
-    * prefetch_related()
-* Enabling Memcached Server
-* Using Elastic Search
+- Using a Caching Framework.
+- Laziness to avoid computation in the first place.
+- QuerySets Specific Function
+  - select_related()
+  - prefetch_related()
+- Enabling Memcached Server
+- Using Elastic Search
 
 # Application Walkthrough 🚲
 
@@ -47,25 +90,21 @@
 
 <img src="./readme_images/1.png">
 
-## User's Dashboard 
+## User's Dashboard
 
 <img src="./readme_images/2.png">
-
 
 ## Creating a new form
 
 <img src="./readme_images/3.png">
 
-
 ## Form Detail Page
 
 <img src="./readme_images/4.png">
 
-
 ## Form to be shared with Customers
 
 <img src="./readme_images/5.png">
-
 
 # Tech Stack 📊
 
@@ -118,3 +157,5 @@
 - uritemplate==3.0.1
 - urllib3==1.26.6
 - whitenoise==5.3.0
+
+---
